@@ -6,6 +6,9 @@ const app = express();
 //Connecting to datbase
 connectDB();
 
+// Initial middleware for body parser.
+app.use(express.json({ extended: false }));
+
 app.get('/', (req, res) => {
     res.send('The YAPR API is now running at this time.');
 })
