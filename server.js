@@ -10,6 +10,13 @@ app.get('/', (req, res) => {
     res.send('The YAPR API is now running at this time.');
 })
 
+//Defining our route
+
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
+
 // Changing port to process.env
 const PORT = process.env.PORT || 4000;
 
