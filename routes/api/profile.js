@@ -129,9 +129,21 @@ router.get('/user/:user_id', async (req, res) => {
     }
 });
 
+// @route  DELETE api/profile
+// @desc   Delete profile, user and posts
+// @access Private
 
+router.delete('/', auth, async (req, res) => {
+    try {
+        await Profile.findOneAndDelete({ user: req.user.id }); //findoneAndRemove is now deprecated. New function is findOneAndDelete
 
+        await User.findOneAndDelete({ _id: req.user.id }); //findoneAndRemove is now deprecated. New function is findOneAndDelete
 
-
+        res.json({ msg: "User has been removed from the database."});
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send("There was a server error.");
+    }
+});
 
 module.exports = router;
